@@ -14,11 +14,14 @@ cp -p /usr/share/zoneinfo/UTC /etc/localtime
 
 yum clean all
 yum -y update
-yum -y install curl nc openssh-clients rpm ruby ruby-libs sudo tar unzip zip yum wget
+yum -y install curl nc openssh-clients rpm ruby ruby-libs sudo tar unzip zip yum wget runit
 
 chmod 640 /etc/sudoers
 echo "%wheel    ALL=(ALL)       ALL" >> /etc/sudoers
 echo "firstuser ALL=(ALL)       ALL" >> /etc/sudoers
+# Make sure root can run app_start without a tty or password
+sed -i -e 's/^Defaults.*requiretty/Defaults !requiretty/' /etc/sudoers
+egrep '^Defaults.*tty' /etc/sudoers
 chmod 440 /etc/sudoers
 
 cd /root/build
