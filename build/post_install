@@ -14,6 +14,11 @@ cp -p /usr/share/zoneinfo/UTC /etc/localtime
 
 yum clean all
 yum -y update
+
+# Purge CentOS repo files that get put on the system with every dot-rev OS update
+find /etc/yum.repos.d/ -type f -name '*.repo' '!' -name 'local.repo' | xargs -d '\n' /bin/rm -f
+
+# Add basic required packages
 yum -y install curl nc openssh-clients rpm ruby ruby-libs sudo tar unzip zip yum wget runit
 
 chmod 640 /etc/sudoers
