@@ -4,10 +4,12 @@ cd /root/build
 /bin/rm -f /etc/yum.repos.d/*.repo*
 install -o root -g root -m 644 local.repo /etc/yum.repos.d/
 
+# Create "firstuser" unpriv shell account
 groupadd -g 500 firstuser
-useradd -u 500 -g 500 -d /home/firstuser -s /bin/bash firstuser
-echo firstuser1234 | passwd --stdin firstuser
-passwd -l root
+# $ echo firstuser1234 | openssl passwd -stdin -1
+useradd -u 500 -g 500 -d /home/firstuser -s /bin/bash -p '$1$xgBMWsf3$rae38nIFO3G1TacXTT2cr.' firstuser
+# Lock root account
+usermod -L root
 
 /bin/rm -f /etc/local/time
 cp -p /usr/share/zoneinfo/UTC /etc/localtime
