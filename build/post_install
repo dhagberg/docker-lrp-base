@@ -28,7 +28,7 @@ echo "%wheel    ALL=(ALL)       ALL" >> /etc/sudoers
 echo "firstuser ALL=(ALL)       ALL" >> /etc/sudoers
 # Make sure root can run app_start without a tty or password
 sed -i -e 's/^Defaults.*requiretty/Defaults !requiretty/' /etc/sudoers
-egrep '^Defaults.*tty' /etc/sudoers
+egrep -i '.*tty' /etc/sudoers
 chmod 440 /etc/sudoers
 
 cd /root/build
