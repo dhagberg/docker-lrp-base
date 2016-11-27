@@ -15,14 +15,12 @@ useradd -u 500 -g 500 -d /home/firstuser -s /bin/bash -p '$1$xgBMWsf3$rae38nIFO3
 # Lock root account
 usermod -L root
 
-timedatectl set-timezone UTC
-
 # Latest centos updates
 yum clean all
 yum -y update
 
 # Add basic required packages plus pc1 puppet-agent
-yum -y install curl nc openssh-clients rpm ruby ruby-libs sudo tar unzip zip yum wget \
+yum -y install nc openssh-clients sudo unzip zip wget \
     runit puppet-agent
 
 chmod 640 /etc/sudoers
