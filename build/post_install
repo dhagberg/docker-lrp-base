@@ -1,8 +1,12 @@
 #!/bin/bash
 set -xe
 cd /root/build
-/bin/rm -f /etc/yum.repos.d/*.repo*
-install -o root -g root -m 644 local.repo /etc/yum.repos.d/
+yum -y localinstall \
+    epel-release-latest-el7.noarch.rpm \
+    pgdg-centos96-el7.noarch.rpm \
+    puppetlabs-release-pc1-el-7.noarch.rpm
+/bin/rm -f *.rpm
+install -o root -g root -m 644 oss-3rdparty.repo /etc/yum.repos.d/
 
 # Create "firstuser" unpriv shell account
 groupadd -g 500 firstuser
@@ -11,17 +15,15 @@ useradd -u 500 -g 500 -d /home/firstuser -s /bin/bash -p '$1$xgBMWsf3$rae38nIFO3
 # Lock root account
 usermod -L root
 
-/bin/rm -f /etc/local/time
-cp -p /usr/share/zoneinfo/UTC /etc/localtime
+timedatectl set-timezone UTC
 
+# Latest centos updates
 yum clean all
 yum -y update
 
-# Purge CentOS repo files that get put on the system with every dot-rev OS update
-find /etc/yum.repos.d/ -type f -name '*.repo' '!' -name 'local.repo' | xargs -d '\n' /bin/rm -f
-
-# Add basic required packages
-yum -y install curl nc openssh-clients rpm ruby ruby-libs sudo tar unzip zip yum wget runit
+# Add basic required packages plus pc1 puppet-agent
+yum -y install curl nc openssh-clients rpm ruby ruby-libs sudo tar unzip zip yum wget \
+    runit puppet-agent
 
 chmod 640 /etc/sudoers
 echo "%wheel    ALL=(ALL)       ALL" >> /etc/sudoers
@@ -32,14 +34,5 @@ egrep -i '.*tty' /etc/sudoers
 chmod 440 /etc/sudoers
 
 cd /root/build
-curl -o ks_gpg_keys.zip $ksurl/centos6_gpg_keys.zip
-unzip -o -d /etc/pki/rpm-gpg/ ks_gpg_keys.zip
-cd /etc/pki/rpm-gpg
-for f in $(/bin/ls -1 RPM-GPG-KEY-*); do
-    rpm --import $f
-done
-
-cd /root/build
-yum -y install ruby-shadow ruby-augeas puppet facter
 yum -y clean all
 

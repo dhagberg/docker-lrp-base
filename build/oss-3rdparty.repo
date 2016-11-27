@@ -1,0 +1,7 @@
+[oss-3rdparty]
+name=Open Source Packaged Third Party Software
+baseurl=http://puppetmaster:4080/yum-dev/oss-3rdparty/el6/$basearch
+enabled=1
+gpgcheck=0
+metadata_expire=300
+mirrorlist_expire=300
