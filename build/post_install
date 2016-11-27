@@ -20,7 +20,7 @@ yum clean all
 yum -y update
 
 # Add basic required packages plus pc1 puppet-agent
-yum -y install nc openssh-clients sudo unzip zip wget \
+yum -y install nc openssh-clients openssl sudo unzip zip wget which \
     runit puppet-agent
 
 chmod 640 /etc/sudoers
