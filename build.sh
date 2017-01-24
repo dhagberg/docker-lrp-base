@@ -1,7 +1,7 @@
 #!/bin/bash
 set -xe
 # Get latest centos
-docker pull centos:centos6
+docker pull centos:centos7
 # Update timestamp
 buildts=$(TZ=UTC date "+%Y-%m-%dT%H:%M:%SZ")
 sed -e "s/@BUILDTS@/${buildts}/g" Dockerfile.in > Dockerfile
