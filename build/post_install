@@ -3,8 +3,7 @@ set -xe
 cd /root/build
 yum -y localinstall \
     epel-release-latest-el7.noarch.rpm \
-    pgdg-centos96-el7.noarch.rpm \
-    puppetlabs-release-pc1-el-7.noarch.rpm
+    pgdg-centos10-el7.noarch.rpm
 /bin/rm -f *.rpm
 install -o root -g root -m 644 oss-3rdparty.repo /etc/yum.repos.d/
 
@@ -19,9 +18,8 @@ usermod -L root
 yum clean all
 yum -y update
 
-# Add basic required packages plus pc1 puppet-agent
-yum -y install nc openssh-clients openssl sudo unzip zip wget which \
-    runit puppet-agent
+# Add basic required packages plus runit
+yum -y install nc openssh-clients openssl sudo unzip zip wget which runit
 
 chmod 640 /etc/sudoers
 echo "%wheel    ALL=(ALL)       ALL" >> /etc/sudoers
