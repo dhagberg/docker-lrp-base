@@ -3,7 +3,6 @@ set -xe
 cd /root/build
 yum -y localinstall $(/bin/ls -1 *.rpm)
 /bin/rm -f *.rpm
-install -o root -g root -m 644 oss-3rdparty.repo /etc/yum.repos.d/
 
 # Create "firstuser" unpriv shell account
 groupadd -g 500 firstuser
