@@ -15,8 +15,17 @@ usermod -L root
 yum clean all
 yum -y update
 
-# Add basic required packages plus runit
-yum -y install nc openssh-clients openssl sudo unzip zip wget which runit
+# Add basic required packages
+yum -y install nc openssh-clients openssl sudo unzip zip wget which
+
+# Install runit from packagecloud
+cd /root/build
+runit_vers=2.1.2-1
+runit_sha1=1815bb2cfa203f91b6f59a9bf04110cd148a4f6f
+curl -fsSL -o runit.rpm "https://packagecloud.io/imeyer/runit/packages/el/6/runit-${runit_vers}.el6.x86_64.rpm/download.rpm"
+echo "${runit_sha1}  runit.rpm" | sha1sum -c -
+yum -y localinstall runit.rpm
+/bin/rm -f runit.rpm
 
 chmod 640 /etc/sudoers
 echo "%wheel    ALL=(ALL)       ALL" >> /etc/sudoers
