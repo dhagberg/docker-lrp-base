@@ -1,20 +1,14 @@
 #!/bin/bash
 set -xe
 cd /root/build
-# Installs epel repo, pgdg repo, runit from packagecloud
-yum -y localinstall $(/bin/ls -1 *.rpm)
-/bin/rm -f *.rpm
-
-# Create "firstuser" unpriv shell account
-groupadd -g 500 firstuser
-# $ echo firstuser1234 | openssl passwd -stdin -1
-useradd -u 500 -g 500 -d /home/firstuser -s /bin/bash -p '$1$xgBMWsf3$rae38nIFO3G1TacXTT2cr.' firstuser
-# Lock root account
-usermod -L root
 
 # Latest centos updates
 yum clean all
 yum -y update
+
+# Installs epel repo, pgdg repo, runit from packagecloud
+yum -y localinstall $(/bin/ls -1 *.rpm)
+/bin/rm -f *.rpm
 
 # If one of those updates created a new *.rpmnew file, use it
 cd /etc/yum.repos.d
@@ -29,6 +23,13 @@ if [ -n "$newchk" ]; then
     done
 fi
 cd /
+
+# Create "firstuser" unpriv shell account
+groupadd -g 500 firstuser
+# $ echo firstuser1234 | openssl passwd -stdin -1
+useradd -u 500 -g 500 -d /home/firstuser -s /bin/bash -p '$1$xgBMWsf3$rae38nIFO3G1TacXTT2cr.' firstuser
+# Lock root account
+usermod -L root
 
 # Disable all pgdg repo entries except for common and 10
 yum-config-manager -q -C -y --disable 'pgdg*' >/tmp/ycm.out 2>&1 
