@@ -33,7 +33,7 @@ usermod -L root
 
 # Disable all pgdg repo entries except for common and 10
 yum-config-manager -q -C -y --disable 'pgdg*' >/tmp/ycm.out 2>&1 
-yum-config-manager -q -C -y --enable 'pgdg-common' --enable 'pgdg10' >/tmp/ycm.out 2>&1
+yum-config-manager -q -C -y --enable 'pgdg-common' --enable 'pgdg14' >/tmp/ycm.out 2>&1
 
 # Add basic required packages
 yum -y install nc openssh-clients openssl sudo unzip zip wget which
