@@ -1,4 +1,4 @@
-docker-co811-base
+docker-lrp-base
 =================
 
-docker build scripts for co811-base image
+docker build scripts for lrp-base image

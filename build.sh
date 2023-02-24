@@ -5,7 +5,7 @@ set -xe
 buildts=$(TZ=UTC date "+%Y-%m-%dT%H:%M:%SZ")
 sed -e "s/@BUILDTS@/${buildts}/g" Dockerfile.in > Dockerfile
 
-PLAIN_NAME=co811-base
+PLAIN_NAME=lrp-base
 HUB_NAME=dhagberg/$PLAIN_NAME
 SVN_NAME=svn.co811.org:5000/$PLAIN_NAME
 
