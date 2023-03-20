@@ -1,5 +1,5 @@
 #!/bin/bash
-set -xe
+set -xeuo pipefail
 
 # Update timestamp
 buildts=$(TZ=UTC date "+%Y-%m-%dT%H:%M:%SZ")
