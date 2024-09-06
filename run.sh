@@ -1,3 +1,3 @@
 #!/bin/bash
 set -xe
-exec sudo docker run --rm -ti dhagberg/co811-base
+exec sudo docker run --rm -ti dhagberg/lrp-u-base bash
