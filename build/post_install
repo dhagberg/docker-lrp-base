@@ -9,7 +9,7 @@ apt-get update
 
 # Add basic required packages and "runit"
 apt-get -y install -y netcat-traditional openssh-client openssl sudo gpg \
-  unzip zip wget debianutils adduser ca-certificates tzdata util-linux \
+  unzip zip curl wget debianutils adduser ca-certificates tzdata util-linux \
   runit
 
 # Create "firstuser" unpriv shell account
