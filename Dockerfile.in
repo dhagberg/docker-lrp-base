@@ -1,4 +1,4 @@
-FROM centos:7
+FROM ubuntu:noble
 MAINTAINER D. J. Hagberg <dhagberg@millibits.com>
 ENV BUILDTS @BUILDTS@
 COPY build/ /root/build/
