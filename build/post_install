@@ -4,7 +4,7 @@ export DEBIAN_FRONTEND=noninteractive
 cd /root/build
 
 # Latest ubuntu updates
-apt-get clean; apt clean; /bin/rm -rf /var/lib/apt/lists/*
+apt-get clean; /bin/rm -rf /var/lib/apt/lists/*
 apt-get update
 
 # Add basic required packages and "runit"
@@ -130,6 +130,7 @@ Suites: $codename-$pgdg
 Components: $COMPONENTS
 Signed-By: $KEYRING
 EOF
+apt-get update -y
 cat <<EOF
 
 You can now start installing packages from $HOST.
@@ -148,4 +149,4 @@ chmod 440 /etc/sudoers.d/firstuser
 #chmod 440 /etc/sudoers
 
 cd /root/build
-apt-get clean; apt clean; /bin/rm -rf /var/lib/apt/lists/*
+apt-get clean; /bin/rm -rf /var/lib/apt/lists/*
