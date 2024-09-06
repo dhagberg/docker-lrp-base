@@ -13,8 +13,10 @@ docker build --pull -t $HUB_NAME .
 /bin/rm -f Dockerfile
 
 # Tag and push if given
-if [ "$1" = "push" ]; then
-    docker push $HUB_NAME
-    docker tag  $HUB_NAME $CI_NAME
-    docker push $CI_NAME
+if [ $# -ge 1 ]; then
+    if [ "$1" = "push" ]; then
+        docker push $HUB_NAME
+        docker tag  $HUB_NAME $CI_NAME
+        docker push $CI_NAME
+    fi
 fi
